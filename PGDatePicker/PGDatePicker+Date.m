@@ -64,15 +64,34 @@
     NSDateComponents *dateComponents = [self.calendar components:self.unitFlags fromDate:[NSDate date]];
     NSString *str = [[self.pickerView textOfSelectedRowInComponent:0] componentsSeparatedByString:self.yearString].firstObject;
     dateComponents.year = [str integerValue];
+//    更新选择的年
     if (component == 0) {
         NSString *str = [[self.pickerView textOfSelectedRowInComponent:1] componentsSeparatedByString:self.monthString].firstObject;
         dateComponents.month = [str integerValue];
         BOOL refresh = [self setMonthListWithComponents:dateComponents refresh:true];
         [self.pickerView reloadComponent:1 refresh:refresh];
     }
-    if (component != 2) {
-        BOOL refresh = [self setDayListWithComponent:component dateComponents:dateComponents refresh:false];
+    //更新选择的月
+//    if (component != 2) {
+//        BOOL refresh = [self setDayListWithComponent:component dateComponents:dateComponents refresh:false];
+//        [self.pickerView reloadComponent:2 refresh:refresh];
+//    }
+    
+
+    if (component == 0 || component == 1) {
+        BOOL refresh = [self setDayListWithComponent:component dateComponents:dateComponents refresh:true];
         [self.pickerView reloadComponent:2 refresh:refresh];
     }
+    if (component == 0 || component == 1 || component == 2) {
+        BOOL refresh = [self setHourList2WithDateComponents:dateComponents refresh:true];
+        [self.pickerView reloadComponent:3 refresh:refresh];
+    }
+    //斌加
+    if ([self.delegate respondsToSelector:@selector(datePicker:didSelectDate:)]) {
+        [self.delegate datePicker:self didSelectDate:dateComponents];
+    }
+    
+   
+    
 }
 @end

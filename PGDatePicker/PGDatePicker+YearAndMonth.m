@@ -50,10 +50,17 @@
         [self.pickerView reloadComponent:1 refresh:refresh];
     }
     
-    //斌加
+    
+    //斌加//
+    if (component == 1) {
+                BOOL refresh = [self setDayListWithComponent:component dateComponents:dateComponents refresh:false];
+                [self.pickerView reloadComponent:2 refresh:refresh];
+            }
+    
+    
     if ([self.delegate respondsToSelector:@selector(datePicker:didSelectDate:)]) {
         [self.delegate datePicker:self didSelectDate:dateComponents];
     }
-    
+    //斌加//
 }
 @end

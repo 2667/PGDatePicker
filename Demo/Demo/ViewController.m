@@ -87,14 +87,19 @@
  年月日
  */
 - (IBAction)dateHandler:(id)sender {
-    PGDatePickManager *datePickManager = [[PGDatePickManager alloc]init];
-    datePickManager.isShadeBackgroud = true;
-    PGDatePicker *datePicker = datePickManager.datePicker;
+//    PGDatePickManager *datePickManager = [[PGDatePickManager alloc]init];
+//    datePickManager.isShadeBackgroud = true;
+
+PGDatePicker *datePicker = [[PGDatePicker alloc]initWithFrame:CGRectMake(0, 100, [UIScreen mainScreen].bounds.size.width, 300)];
+//    PGDatePicker *datePicker = datePickManager.datePicker;
     datePicker.delegate = self;
     datePicker.datePickerType = PGPickerViewType1;
     datePicker.isHiddenMiddleText = true;
     datePicker.datePickerMode = PGDatePickerModeDate;
-    [self presentViewController:datePickManager animated:false completion:nil];
+//    [self presentViewController:datePickManager animated:false completion:nil];
+    
+    [self.view addSubview:datePicker];
+    datePicker.backgroundColor = [UIColor redColor];
     
 //    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
 //    dateFormatter.dateFormat = @"yyyy-MM-dd";
