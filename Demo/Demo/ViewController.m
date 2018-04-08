@@ -49,15 +49,29 @@
  年月
  */
 - (IBAction)yearAndMonthHandler:(id)sender {
-    PGDatePickManager *datePickManager = [[PGDatePickManager alloc]init];
-    datePickManager.style = PGDatePickManagerStyle3;
-    datePickManager.isShadeBackgroud = true;
-    
-    PGDatePicker *datePicker = datePickManager.datePicker;
+//    PGDatePickManager *datePickManager = [[PGDatePickManager alloc]init];
+//    //PGDatePickManagerStyle1取消和确定按键在上面,view贴近屏幕底部,
+////    PGDatePickManagerStyle3取消和确定按键在下面,view在屏幕中间,
+//    datePickManager.style = PGDatePickManagerStyle2;
+//    datePickManager.isShadeBackgroud = true;
+
+    PGDatePicker *datePicker = [[PGDatePicker alloc]initWithFrame:CGRectMake(0, 100, [UIScreen mainScreen].bounds.size.width, 300)];
+//    PGDatePicker *datePicker = datePickManager.datePicker;
     datePicker.delegate = self;
-    datePicker.datePickerType = PGPickerViewType2;
+    //中间年月日的分割线样式,type1是连起来的.type2是分开的四条线
+    datePicker.datePickerType = PGPickerViewType1;
     datePicker.datePickerMode = PGDatePickerModeYearAndMonth;
-    [self presentViewController:datePickManager animated:false completion:nil];
+//    [self presentViewController:datePickManager animated:false completion:nil];
+//    只显示中间的文字，设置isHiddenMiddleText为false即可，默认是true
+    datePicker.isHiddenMiddleText = true;
+    
+    
+    [self.view addSubview:datePicker];
+    datePicker.backgroundColor = [UIColor redColor];
+    
+    
+    
+    
 
 //    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
 //    dateFormatter.dateFormat = @"yyyy-MM";
@@ -78,7 +92,7 @@
     PGDatePicker *datePicker = datePickManager.datePicker;
     datePicker.delegate = self;
     datePicker.datePickerType = PGPickerViewType1;
-    datePicker.isHiddenMiddleText = false;
+    datePicker.isHiddenMiddleText = true;
     datePicker.datePickerMode = PGDatePickerModeDate;
     [self presentViewController:datePickManager animated:false completion:nil];
     
@@ -278,6 +292,8 @@
 
 #pragma PGDatePickerDelegate
 - (void)datePicker:(PGDatePicker *)datePicker didSelectDate:(NSDateComponents *)dateComponents {
+    
+    _selectedDateTextfiled.text = [NSString stringWithFormat:@"%ld年%ld月%ld日%ld时%ld分%ld秒",(long)dateComponents.year ,(long)dateComponents.month,(long)dateComponents.day,(long)dateComponents.hour,(long)dateComponents.minute,(long)dateComponents.second];
     NSLog(@"dateComponents = %@", dateComponents);
 }
 

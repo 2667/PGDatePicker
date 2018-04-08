@@ -49,5 +49,11 @@
         BOOL refresh = [self setMonthListWithComponents:dateComponents refresh:true];
         [self.pickerView reloadComponent:1 refresh:refresh];
     }
+    
+    //斌加
+    if ([self.delegate respondsToSelector:@selector(datePicker:didSelectDate:)]) {
+        [self.delegate datePicker:self didSelectDate:dateComponents];
+    }
+    
 }
 @end

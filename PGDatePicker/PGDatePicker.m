@@ -108,6 +108,7 @@ static NSString *const reuseIdentifier = @"PGDatePickerView";
     }
 }
 
+//headview的确定按钮的block里面会调用这一句
 - (void)tapSelectedHandler {
     if (self.autoSelected == false) {
         [self selectedDateLogic];
@@ -406,6 +407,9 @@ static NSString *const reuseIdentifier = @"PGDatePickerView";
         case PGDatePickerModeYearAndMonth:
         {
             [self yearAndMonth_didSelectWithComponent:component];
+          
+//            yearAndMonth_setupSelectedDate
+            
         }
             break;
         case PGDatePickerModeDate:
