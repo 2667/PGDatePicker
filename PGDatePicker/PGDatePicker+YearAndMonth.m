@@ -52,7 +52,7 @@
     
     
     //斌加//
-    if (component == 1) {
+    if (component == 0 || component == 1) {
                 BOOL refresh = [self setDayListWithComponent:component dateComponents:dateComponents refresh:false];
                 [self.pickerView reloadComponent:2 refresh:refresh];
             }
